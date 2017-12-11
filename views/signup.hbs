@@ -1,0 +1,47 @@
+<h2> Signup Page</h2>
+
+<p>Welcome, <p>
+
+<div style="">
+<form method="post" action="signup" style="float: center;">
+  <div style = "float:left; width: 200px;">Name </div><br>
+  <input type="text" name="firstName" placeholder="First">
+  <input type="text" name="lastName" placeholder="Last"><br>
+
+  <br>
+  <div style = "float:left; width: 200px;">Sex</div><br>
+  <input type="radio" name="sex" value="Male" checked>Male
+  <input type="radio" name="sex" value="Female">Female
+  <input type="radio" name="sex" value="Other">Other
+  <input type="radio" name="sex" value="Rather not say"> Rather not say<br><br>
+
+  <br>
+  {{#if exist}}
+  <h3 style="color:red;">Username already exists</h3>
+  {{/if}}
+  <div style = "float:left; width: 200px;">Choose your username</div><br>
+  <input type="text" name="username" placeholder="@freemail.com"><br>
+
+  <br>
+  {{#if NoPassword}}
+  <h3 style="color:red;">Password is not a match or is blank</h3>
+  {{/if}}
+  <div style = "float:left; width: 200px;">Create a password</div><br>
+  <input type="password" name="password1" placeholder="Password"><br>
+
+  <br>
+  <div style = "float:left; width: 200px;">Confirm your password</div><br>
+  <input type="password" name="password2" placeholder="Confirm Password"><br>
+.
+  <br>
+  <br>
+  <input type="submit" value="Create Email Account">
+</form>
+
+{{#if newUser}}
+<h3 style="color:red;">User creation is successfully</h3>
+{{/if}}
+
+<br> <a href="/">Back to Main Page</a><br>
+
+</div>

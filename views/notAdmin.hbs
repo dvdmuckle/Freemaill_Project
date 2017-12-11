@@ -1,0 +1,31 @@
+<h2> Assignments for <strong>{{ user.username}} </strong> </h2>
+{{#if rows}}
+  <table id="myTable">
+    <thead>
+    <tr><th>ID</th><th>Username</th><th>Description</th><th>Due</th></tr>
+  </thead>
+  <tbody>
+  {{#each rows}}
+    <tr><td> {{ id }}</td>
+        <td> {{ username }}</td>
+        <td> {{ description }}</td>
+        <td> {{ due }}</td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table> <br><hr>
+
+{{else}}
+  <h3 style="color:red;">No assignments</h3>
+{{/if}}
+<br><a href="/exam/changePassword">Change Password</a><br>
+<a href="/exam/logout">Log out</a><br>
+
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+<script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<script>
+$(document).ready(function(){
+    $('#myTable').DataTable();
+});
+</script>

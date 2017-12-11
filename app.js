@@ -10,6 +10,81 @@ var users = require('./routes/users');
 
 var app = express();
 
+
+
+// new stuff starts here
+var session = require('express-session');
+var flash = require('express-flash');
+var env = require('dotenv').config();
+
+const Client = require('pg').Client;
+const client = new Client({
+  connectionString: process.env.DATABASE_URL
+});
+client.connect(); //connect to database
+
+// javascript password encryption (https://www.npmjs.com/package/bcryptjs)
+var bcrypt = require('bcryptjs');
+//  authentication middleware
+var passport = require('passport');
+// authentication locally (not using passport-google, passport-twitter, passport-github...)
+var LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy({
+    usernameField: 'username', // form field
+    passwordField: 'password'
+  },
+  function(username, password, done) {
+    client.query('SELECT * FROM examusers WHERE username = $1', [username], function(err, result) {
+      if (err) {
+        console.log("app.js: SQL error");
+        return done(null,false, {message: 'OOPS! sql error'});
+      }
+      if (result.rows.length > 0) {
+
+        var matched = bcrypt.compareSync(password, result.rows[0].password);
+
+        if (matched) {
+          console.log("Successful login, ", result.rows[0]);
+          return done(null, result.rows[0]);
+        }
+      }
+      console.log("Bad username or password", result.rows[0]);
+      // returning to passport
+      // message is passport key
+      return done(null, false, {message: 'Bad username or password'});
+    });
+  })
+);
+
+// Store user information into session
+passport.serializeUser(function(user, done) {
+  //return done(null, user.id);
+  return done(null, user);
+});
+
+// Get user information out of session
+passport.deserializeUser(function(id, done) {
+  return done(null, id);
+});
+
+// Use the session middleware
+// configure session object to handle cookie
+// req.flash() requires sessions
+app.use(session({
+  secret: 'FinalProject',
+  resave:false,
+  saveUninitialized: true,
+}));
+
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+// new stuff ends here
+
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
