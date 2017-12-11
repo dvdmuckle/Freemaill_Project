@@ -1,0 +1,19 @@
+{{#if user.username}}
+
+  <h3>Hello, </h3>
+  <p>You are logged in as {{user.username}}</p>
+  <a href="/logout">Log out</a><br>
+
+{{else}}
+  {{#if successful_login}}
+
+    <h3>Hello, </h3>
+    <h3>You Successfully created the account name {{username}}@freemail.com </h3>
+    <p> Please log in to continue </p>
+    <a href="/login">Log in</a><br>
+  {{else}}
+    <p>Please log in or sign up</p>
+    <a href="/login">Log in</a><br>
+    <a href="/signup">Sign up</a><br>
+  {{/if}}
+{{/if}}
