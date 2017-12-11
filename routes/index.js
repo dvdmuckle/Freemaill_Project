@@ -25,7 +25,7 @@ function notLoggedIn(req, res, next) {
   if (!req.user) {
     next();
   } else {
-    res.redirect('/profile');
+    res.redirect('/mail/profile');
   }
 }
 
@@ -48,7 +48,7 @@ router.post('/login',
   // authentication locally (not using passport-google, passport-twitter, passport-github...)
   passport.authenticate('local', { failureRedirect: 'login', failureFlash:true }),
   function(req, res,next) {
-    res.redirect('/profile'); // Successful. redirect to localhost:3000/profile
+    res.redirect('/mail/profile'); // Successful. redirect to localhost:3000/mail/profile
 });
 
 /////////////////////////////////////////////////////////////////////
@@ -124,8 +124,5 @@ router.post('/signup', function(req, res, next){
 
 /////////////////////////////////////////////////////////////////////
 
-router.get('/profile', function(req, res, next){
-  res.render('profile', {user : req.user});
-});
 
 module.exports = router;
