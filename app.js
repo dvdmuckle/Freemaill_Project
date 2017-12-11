@@ -10,8 +10,6 @@ var mail = require('./routes/mail');
 
 var app = express();
 
-
-
 // new stuff starts here
 var session = require('express-session');
 var flash = require('express-flash');

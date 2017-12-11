@@ -29,6 +29,10 @@ function notLoggedIn(req, res, next) {
   }
 }
 
+function encryptPWD(password){
+  var salt = bcrypt.genSaltSync(10);
+  return bcrypt.hashSync(password, salt);
+}
 
 //  ACTUAL ROUTES FUNCTION //
 router.get('/', loggedIn, function(req, res, next) {
