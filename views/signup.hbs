@@ -1,47 +1,53 @@
-<h2> Signup Page</h2>
-
-<p>Welcome, <p>
-
-<div style="">
+  <div class="container" class="center" style="border: 2px; width: 50%" >
+    <div class="row">
+      <div class="col s12">
+        <div class="card-panel grey lighten-5 z-depth-2">
+          <h4 id="Logon_Fonts">Welcome to the Signup Page</h4>
 <form method="post" action="signup" style="float: center;">
-  <div style = "float:left; width: 200px;">Name </div><br>
+  <div id="form_label" >Name </div><br>
   <input type="text" name="firstName" placeholder="First">
   <input type="text" name="lastName" placeholder="Last"><br>
 
   <br>
-  <div style = "float:left; width: 200px;">Sex</div><br>
-  <input type="radio" name="sex" value="Male" checked>Male
-  <input type="radio" name="sex" value="Female">Female
-  <input type="radio" name="sex" value="Other">Other
-  <input type="radio" name="sex" value="Rather not say"> Rather not say<br><br>
+  <div id="form_label">Sex</div><br>
+  <input type="radio" name="sex" id="Male" value="Male" checked>
+  <label for="Male">Male</label>
+  <input type="radio" name="sex" id="Female" value="Female">
+  <label for="Female">Female</label>
+  <input type="radio" name="sex" id="Other" value="Other">
+  <label for="Other">Other</label>
+  <input type="radio" name="sex" id="Rather not say" value="Rather not say">
+  <label for="Rather not say">Rather not say</label><br><br>
+
 
   <br>
   {{#if exist}}
-  <h3 style="color:red;">Username already exists</h3>
+  <h3 id="form_label" >Username already exists</h3>
   {{/if}}
-  <div style = "float:left; width: 200px;">Choose your username</div><br>
+  <div id="form_label">Choose your username</div><br>
   <input type="text" name="username" placeholder="@freemail.com"><br>
 
   <br>
   {{#if NoPassword}}
   <h3 style="color:red;">Password is not a match or is blank</h3>
   {{/if}}
-  <div style = "float:left; width: 200px;">Create a password</div><br>
+  <div id="form_label">Create a password</div><br>
   <input type="password" name="password1" placeholder="Password"><br>
 
   <br>
-  <div style = "float:left; width: 200px;">Confirm your password</div><br>
+  <div id="form_label">Confirm your password</div><br>
   <input type="password" name="password2" placeholder="Confirm Password"><br>
 .
   <br>
   <br>
-  <input type="submit" value="Create Email Account">
+  <input type="submit" class="btn waves-effect waves-light" value="Create Email Account">
+  <a class="btn waves-effect waves-light right" href="/">Back to Main Page</a><br>
 </form>
+</div>
+</div>
+</div>
 
 {{#if newUser}}
 <h3 style="color:red;">User creation is successfully</h3>
 {{/if}}
-
-<br> <a href="/">Back to Main Page</a><br>
-
 </div>

@@ -1,47 +1,27 @@
-<main class="container">
-  <outer  style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-    <div class="panel panel-info" >
-      <header class="panel-heading">
-        <div class="panel-title">Sign In</div>
-      </header>
-      <section style="padding-top:30px" class="panel-body" >
-        <div style="display:none" class="alert alert-danger col-sm-12"></div>
-        <form method = "post"  class="form-horizontal" role="form" action="login">
-          <userid style="margin-bottom: 25px" class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input type="text" class="form-control" name="username" value="" placeholder="Username or Email">
-          </userid>
-          <password style="margin-bottom: 25px" class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-            <input type="password" class="form-control" name="password" placeholder="password">
-          </password>
-          <div style="margin-top:10px" class="form-group">
-            <!-- Button -->
-            <div class="col-sm-12 controls">
-              <input type="submit" class="btn btn-success" value = "Log In">
-            </div>
-          </div>
-          <signup class="form-group">
-            <div class="col-md-12 control">
-              <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >Don't have an account!
-                <a href="/signup" >Sign Up Here</a>
-              </div>
-            </div>
-          </signup>
-        </form>
-      </section>
+<div class="container" class="center" style="border: 2px; width: 50%" >
+  <div class="row">
+    <div class="col s12">
+      <div class="card-panel grey lighten-5 z-depth-2">
+              <form method="post" action="login">
+                <h4 id="Logon_Fonts">Login to Freemail</h4>
+                <div>
+                  <label id="form_label" for="username">Username</label>
+                  <input type="text" id="username" name="username" placeholder="User name" class="validate">
+                </div><br>
 
-    </div>
-  </outer>
-</main>
-<!-- if you don't want bootstraps -->
-<!--
-<form method="post" action="login">
-<input type="text" name="username" placeholder="User name"><br>
-<input type="password" name="password" placeholder="Password"><br>
-<input type="submit" value="Log in">
-</form>
--->
+              <label id="form_label" for="password">Password</label>
+              <input type="password" name="password" placeholder="Password"><br><br>
+
+              <div class="center">
+              <button class="btn waves-effect waves-light" type="submit" name="action">Log In</button>
+            <br>
+            <br>
+              <a class="btn waves-effect waves-light" href="/signup" >Sign Up Here</a>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
 
 {{#if errorMessage}}
 <p>{{errorMessage}}</p>

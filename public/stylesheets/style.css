@@ -1,8 +1,30 @@
-body {
+body{
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #bdbdbd;
+}
+
+#form_label{
+
+    color: #107896;
+    font-weight: bold;
+    float:left;
+    width: 200px;
 }
 
 a {
   color: #00B7FF;
+}
+
+#Logon_Fonts
+{
+    color: #f6432d;
+    text-align: center;
+}
+
+#Card_Background
+{
+  border: 2px white;
+  border-radius: 15px 50px 30px;
+  background-color: white;
 }
