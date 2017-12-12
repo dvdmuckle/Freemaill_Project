@@ -1,0 +1,34 @@
+CREATE TABLE Users
+(
+  Sex INT NOT NULL,
+  Password INT NOT NULL,
+  Username INT NOT NULL,
+  First_Name INT NOT NULL,
+  Last_Name INT NOT NULL,
+  Moderator_Status INT NOT NULL,
+  UserId INT NOT NULL,
+  MessageId INT NOT NULL,
+  PRIMARY KEY (UserId),
+  UNIQUE (Username)
+);
+
+CREATE TABLE Message
+(
+  Read_Status INT NOT NULL,
+  Sender INT NOT NULL,
+  Body INT NOT NULL,
+  Subject INT NOT NULL,
+  In_Trash INT NOT NULL,
+  Recipient INT NOT NULL,
+  MessageId INT NOT NULL,
+  PRIMARY KEY (MessageId)
+);
+
+CREATE TABLE Messages
+(
+  UserId INT NOT NULL,
+  MessageId INT NOT NULL,
+  PRIMARY KEY (UserId, MessageId),
+  FOREIGN KEY (UserId) REFERENCES Users(UserId),
+  FOREIGN KEY (MessageId) REFERENCES Message(MessageId)
+);
