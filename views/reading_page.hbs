@@ -2,7 +2,7 @@
 {{#each rows}}
 
 
-<div class="card blue-grey darken-1" id="Full_Page" >
+<div class="card blue-grey darken-1" id="Full_Page" style="opacity: 500%">
 
   <div class="card-content white-text">
     <br>
@@ -23,19 +23,20 @@
     <div class="row">
     <form class="col s12" action="/mail/sent" method="post">
 
-      <input type="hidden" name="from" value="{{sender}}">
-      <input type="hidden" name="to" value="{{recipient}}">
+      <input type="hidden" name="to" value="{{sender}}">
+      <input type="hidden" name="from" value="{{recipient}}">
+
 
 
       <div class="row">
           <div class="input-field col s12">
-            <input id="subject" type="text" class="validate">
+            <input name="subject" id="subject" type="text" class="validate">
             <label class="active" for="subject">Subject</label>
           </div>
       </div>
       <div class="row">
         <div class="input-field col s12" id="Full_Page">
-          <textarea id="message_body" class="materialize-textarea"></textarea>
+          <textarea name="message_body" id="message_body" class="materialize-textarea"></textarea>
           <label for="message_body">Message</label>
           <button class="btn right waves-effect waves-light" type="submit" name="action">Send
         <i class="material-icons right">send</i>
@@ -44,9 +45,6 @@
       </div>
     </form>
   </div>
-
-
-
 
   </div>
 

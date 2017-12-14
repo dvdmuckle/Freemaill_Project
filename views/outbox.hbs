@@ -61,12 +61,12 @@
         <li>
           <div class="collapsible-header flow-text">
             <i class="material-icons">email</i>
-            To: {{recipient}}@freemail.com
+            <h5>To: {{recipient}}@freemail.com</h5>
           </div>
 
-          <div class="collapsible-body"><p>Subject: {{subject}}</p>
-            <span>Date Sent: {{date_sent}}</span>
-            <ul style="text-align: right ; color: black">
+          <div class="collapsible-body" style="background-color: #bfbfbf"><p>Subject: {{subject}}</p>
+            <span>Date Received: {{date_sent}}</span>
+            <ul style="text-align: right ; color: black; font-size: 130%">
 
               <form method="post" action="/mail/reading_page" target="reading_frame">
                 <input type="hidden" name="message_id_number" value="{{messageid}}">

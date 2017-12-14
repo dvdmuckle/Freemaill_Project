@@ -17,9 +17,7 @@ body{
   background-attachment: fixed;
   background-position: 50%;
   background-size: 100% 100%;
-
 }
-
 #form_bk{
   background-image: url("http://demo.geekslabs.com/materialize-v1.0/images/user-profile-bg.jpg");
   background-color: black;
@@ -31,7 +29,8 @@ body{
 
 #Full_Page{
   width: 100%;
-  min-height: 500px;
+  min-height: 400px;
+  max-height: 500px;
 
 }
 
@@ -65,18 +64,24 @@ iframe[seamless] {
 }
 
 #read_page{
-  background-color: grey;
+  background-color: black;
   min-height: 500px;
+  max-height: 500px;
+  opacity: 0.95;
 }
 
 #email_page{
   color: black;
+  overflow: auto;
+  min-height: 500px;
+  max-height: 500px;
 }
 
 #mail_layout
 {
-  background-color: white;
   min-height: 500px;
+  max-height: 500px;
+
 }
 
 #Logon_Fonts
