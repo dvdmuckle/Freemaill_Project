@@ -29,6 +29,12 @@ body{
   background-size: 100% 100%;
 }
 
+#Full_Page{
+  width: 100%;
+  min-height: 500px;
+
+}
+
 #form_label{
 
     color: #107896;

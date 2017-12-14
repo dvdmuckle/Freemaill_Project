@@ -27,8 +27,7 @@ router.get('/profile', function(req, res, next){
     console.log('it works');
 
     if (err) {
-      console.log("exam.js: sql error ");
-      next(err); // throw error to error.hbs.
+      res.render('profile', {rows: false, user: req.user} ); // throw error to error.hbs.
     }
     else if (result.rows.length > 0) {
       console.log("Found some messages");
@@ -42,6 +41,39 @@ router.get('/profile', function(req, res, next){
   });
 });
 
+router.get('/outbox', function(req, res, next){
+
+  client.query('SELECT * FROM messages WHERE sender=$1',[req.user.username], function(err,result){
+    console.log('it works');
+
+    if (err) {
+      console.log("exam.js: sql error ");
+      next(err); // throw error to error.hbs.
+    }
+    else if (result.rows.length > 0) {
+      console.log("Found some messages");
+      console.log(result.rows);
+      res.render('outbox', {rows: result.rows, user: req.user} );
+    }
+    else{
+      res.render('outbox', {rows: false, user: req.user} );
+      console.log("Oops? Something really bad happened");
+    }
+  });
+});
+
+router.post('/sent', function(req, res, next){
+
+  client.query('INSERT INTO messages(sender, recipient, body, subject, date_sent, read_status, in_trash) VALUES ($1,$2,$3,$4,$5,$6,$7)',[req.body.from,req.body.to,req.body.subject,req.body.message_body,to_char(current_timestamp,'Day, Mon DD,YYYY HH12:MI'),false,false], function(err,result){
+
+    if (err) {
+      res.render('message_sent', {sent: false})
+    }
+    else {
+      res.render('message_sent', {sent: true})
+    }
+  });
+});
 
 router.get('/reading_page', function(req, res, next){
 

@@ -37,7 +37,7 @@
             <li class="divider"></li>
             <li><a href="/logout">Log out</a></li>
           </ul>
-          <a href="#!" class="brand-logo center" style="color:#ffd6cc">&nbsp; FREEMAIL</a>
+          <a href="#!" class="brand-logo center" style="color:#ffd6cc">&nbsp; OUTBOX</a>
           <!-- Dropdown Trigger -->
           <ul class="right hide-on-small">
             <li><a class="dropdown-button right" style="color:white" href="#!" data-activates="dropdown1">More Options<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -61,16 +61,11 @@
         <li>
           <div class="collapsible-header flow-text">
             <i class="material-icons">email</i>
-            From: {{sender}}@freemail.com
-            {{#if read_status}}
-              <!--DO NOTHING-->
-            {{else}}
-              <span class="new badge"></span>
-            {{/if}}
+            To: {{recipient}}@freemail.com
           </div>
 
           <div class="collapsible-body"><p>Subject: {{subject}}</p>
-            <span>Date Received: {{date_sent}}</span>
+            <span>Date Sent: {{date_sent}}</span>
             <ul style="text-align: right ; color: black">
 
               <form method="post" action="/mail/reading_page" target="reading_frame">
@@ -85,7 +80,7 @@
 
       </ul>
         {{else}}
-        <h4>NO INBOX EMAIL</h4>
+        <h4>NO SENT EMAIL</h4>
       {{/if}}
     </div>
 
