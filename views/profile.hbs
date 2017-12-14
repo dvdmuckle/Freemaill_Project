@@ -1,41 +1,140 @@
 {{#if user.username}}
+<body id="profile_bkc">
 
-<!-- Dropdown Structure -->
-<ul id="dropdown1" class="dropdown-content">
-  <li><a href="/mail/changePassword">Change Password</a></li>
-  <li class="divider"></li>
-  <li><a href="/logout">Log out</a></li>
-</ul>
-<nav>
-  <div class="nav-wrapper">
-      <a href="#!" class="brand-logo center">HELLO {{user.username}}</a>
-      <a href="#"  data-activates="slide-out" class="button-collapse left"><i class="material-icons">menu</i></a>
-      <!-- Dropdown Trigger -->
-      <ul class="right hide-on-med-and-down">
-      <li><a class="dropdown-button right" href="#!" data-activates="dropdown1">More Options<i class="material-icons right">arrow_drop_down</i></a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- The SIDEBAR NAVIGATIONS-->
-<ul id="slide-out" class="side-nav">
-    <li><div class="user-view">
-      <div class="background">
-        <img src="images/office.jpg">
-      </div>
-      <a href="#!user"><img class="circle" src="images/yuna.jpg"></a>
-      <a href="#!name"><span class="white-text name">John Doe</span></a>
-      <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+<!--THE HEADER ITSLEF-->
+  <div class="row">
+    <!--SIDENAV MENU-->
+    <div class="col s1 ">
+      <!-- The SIDEBAR NAVIGATIONS-->
+      <ul id="slide-out" class="side-nav z-depth-5">
+          <li>
+            <div class="user-view">
+            <div class="background">
+              <img src="../images/user-profile-bg.jpg">
+            </div>
+            <img class="circle" src="../images/profile.jpeg">
+            <span class="black-text name">{{user.firstname}} {{user.lastname}}</span>
+            <span class="black-text email">{{user.username}}@freemail.com</span>
+            </div>
+          </li>
+          <li><a href="#!"><i class="material-icons">inbox</i>Inbox</a></li>
+          <li><div class="divider"></div></li>
+          <li><a href="#!"><i class="material-icons">send</i>Output</a></li>
+          <li><div class="divider"></div></li>
+          <li><a href="#!"><i class="material-icons">delete</i>Trash</a></li>
+          <li><div class="divider"></div></li>
+      </ul>
+      <ul style="text-align: left ; color: black">
+        <a href="#" data-activates="slide-out" class="btn-floating button-collapse z-depth-1"><i class="small material-icons">menu</i></a>
+      </ul>
     </div>
-    </li>
-    <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-    <li><a href="#!">Second Link</a></li>
-    <li><div class="divider"></div></li>
-  </ul>
+    <!--THE HEADER MENU-->
+    <div class="col s11 ">
+      <nav class="top-nav z-depth-5" id="Header_Profile">
+        <div class="nav-wrapper">
+          <ul id="dropdown1" class="dropdown-content">
+            <li><a href="/mail/changePassword">Change Password</a></li>
+            <li class="divider"></li>
+            <li><a href="/logout">Log out</a></li>
+          </ul>
+          <a href="#!" class="brand-logo center" style="color:#ffd6cc">&nbsp; FREEMAIL</a>
+          <!-- Dropdown Trigger -->
+          <ul class="right hide-on-small">
+            <li><a class="dropdown-button right" style="color:white" href="#!" data-activates="dropdown1">More Options<i class="material-icons right">arrow_drop_down</i></a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
 
+  <!-- MAIN MAIL PAGE-->
+  <div class="row z-depth-5" id="mail_layout">
+
+    <!--SELECT EMAIL PAGE-->
+    <div class="col s4 z-depth-5" id="email_page" >
+      {{#if rows}}
+
+      <ul class="collapsible" data-collapsible="accordion">
+
+        {{#each rows}}
+
+        <li>
+          <div class="collapsible-header flow-text">
+            <i class="material-icons">email</i>
+            From: {{sender}}@freemail.com
+            {{#if read_status}}
+              <!--DO NOTHING-->
+            {{else}}
+              <span class="new badge"></span>
+            {{/if}}
+          </div>
+
+          <div class="collapsible-body"><p>Subject: {{subject}}</p>
+            <span>Date Received: {{date_sent}}</span>
+            <ul style="text-align: right ; color: black">
+              <a href="#" class="btn-floating card-reveal z-depth-1"><i class="small material-icons">open_in_new</i></a>
+            </ul>
+          </div>
+        </li>
+
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">Subject:{{subject}}</span>
+            <p>Message:{{body}}</p>
+            <p></p>
+          </div>
+          <div class="card-action">
+            <a href="#">REPLY</a>
+            <a href="#">DELETE</a>
+          </div>
+        </div>
+        <div class="divider"></div>
+
+        {{/each}}
+
+      </ul>
+        {{else}}
+        <h4>NO EMAIL</h4>
+
+      {{/if}}
+    </div>
+
+
+    <!--VIEW / EDIT EMAIL-->
+    <div class="col s8 z-depth-5" id="read_page">
+      <div class="row">
+        <div class="col s12 ">
+
+
+
+
+
+
+
+          <!--iframe src="/reading_page" frameborder="0" id="iframe" scrolling="no" >
+            <p>Your browser does not support iframes.</p>
+          </iframe-->
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+<!--RUNNING SCRIPT LAST AT THE END OF THE BODY-->
 <script>
-$(".button-collapse").sideNav();
+  $(".button-collapse").sideNav();
 </script>
+
+
+
+
 
   {{else}}
   {{#if successful_login}}
@@ -50,3 +149,5 @@ $(".button-collapse").sideNav();
     <a href="/signup">Sign up</a><br>
   {{/if}}
 {{/if}}
+
+</body>

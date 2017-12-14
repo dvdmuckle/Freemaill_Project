@@ -4,6 +4,31 @@ body{
   color: #bdbdbd;
 }
 
+#Header_Profile{
+  background-color: grey;
+  background-image: url("../images/header.jpg");
+}
+
+#profile_bkc
+{
+  background-image: url("http://demo.geekslabs.com/materialize-v1.0/images/user-profile-bg.jpg");
+  background-color: black;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50%;
+  background-size: 100% 100%;
+
+}
+
+#form_bk{
+  background-image: url("http://demo.geekslabs.com/materialize-v1.0/images/user-profile-bg.jpg");
+  background-color: black;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50%;
+  background-size: 100% 100%;
+}
+
 #form_label{
 
     color: #107896;
@@ -14,6 +39,38 @@ body{
 
 a {
   color: #00B7FF;
+}
+
+iframe{
+  border: none;
+  scroll-behavior: none;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+}
+
+iframe:focus{
+    outline: none;
+}
+
+iframe[seamless] {
+    display:contents;
+}
+
+#read_page{
+  background-color: grey;
+  min-height: 500px;
+}
+
+#email_page{
+  color: black;
+}
+
+#mail_layout
+{
+  background-color: white;
+  min-height: 500px;
 }
 
 #Logon_Fonts

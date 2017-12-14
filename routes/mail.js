@@ -22,7 +22,29 @@ function encryptPWD(password){
 ////////////////////////////////////////////////////////////////
 
 router.get('/profile', function(req, res, next){
-  res.render('profile', {user : req.user});
+
+
+  client.query('SELECT * FROM messages WHERE recipient=$1',[req.user.username], function(err,result){
+    console.log('it works');
+
+    if (err) {
+      console.log("exam.js: sql error ");
+      next(err); // throw error to error.hbs.
+    }
+    else if (result.rows.length > 0) {
+      console.log("Found some messages");
+      res.render('profile', {rows: result.rows, user: req.user} );
+    }
+    else{
+      res.render('profile', {rows: false, user: req.user} );
+      console.log("Oops? Something really bad happened");
+    }
+  });
+});
+
+router.get('/reading_page', function(req, res, next){
+
+  res.render('reading_page', {row: req.user.username});
 });
 
 router.get('/changePassword', function(req, res, next){
