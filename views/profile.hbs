@@ -69,25 +69,18 @@
             {{/if}}
           </div>
 
-          <div class="collapsible-body"><p>Subject: {{subject}}</p>
+          <div class="collapsible-body"><p>Subject: {{messageid}}</p>
             <span>Date Received: {{date_sent}}</span>
             <ul style="text-align: right ; color: black">
-              <a href="#" class="btn-floating card-reveal z-depth-1"><i class="small material-icons">open_in_new</i></a>
+
+              <form method="post" action="/mail/reading_page" target="reading_frame">
+                <input type="hidden" name="message_id_number" value="{{messageid}}">
+                <button type="submit" name="action" class="btn-floating card-reveal z-depth-1"><i class="small material-icons">open_in_new</i></button>
+              </form>
             </ul>
           </div>
         </li>
 
-        <div class="card blue-grey darken-1">
-          <div class="card-content white-text">
-            <span class="card-title">Subject:{{subject}}</span>
-            <p>Message:{{body}}</p>
-            <p></p>
-          </div>
-          <div class="card-action">
-            <a href="#">REPLY</a>
-            <a href="#">DELETE</a>
-          </div>
-        </div>
         <div class="divider"></div>
 
         {{/each}}
@@ -99,21 +92,13 @@
       {{/if}}
     </div>
 
-
     <!--VIEW / EDIT EMAIL-->
     <div class="col s8 z-depth-5" id="read_page">
       <div class="row">
         <div class="col s12 ">
-
-
-
-
-
-
-
-          <!--iframe src="/reading_page" frameborder="0" id="iframe" scrolling="no" >
+          <iframe src="/mail/reading_page" frameborder="0" name="reading_frame" scrolling="no" >
             <p>Your browser does not support iframes.</p>
-          </iframe-->
+          </iframe>
         </div>
       </div>
     </div>

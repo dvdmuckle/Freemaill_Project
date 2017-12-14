@@ -23,7 +23,6 @@ function encryptPWD(password){
 
 router.get('/profile', function(req, res, next){
 
-
   client.query('SELECT * FROM messages WHERE recipient=$1',[req.user.username], function(err,result){
     console.log('it works');
 
@@ -33,6 +32,7 @@ router.get('/profile', function(req, res, next){
     }
     else if (result.rows.length > 0) {
       console.log("Found some messages");
+      console.log(result.rows);
       res.render('profile', {rows: result.rows, user: req.user} );
     }
     else{
@@ -42,9 +42,32 @@ router.get('/profile', function(req, res, next){
   });
 });
 
+
 router.get('/reading_page', function(req, res, next){
 
-  res.render('reading_page', {row: req.user.username});
+  res.render('reading_page', {rows: false});
+});
+
+router.post('/reading_page', function(req, res, next){
+
+  client.query('SELECT * FROM messages WHERE messageid=$1',[req.body.message_id_number], function(err,result){
+    console.log('iframe works');
+
+    if (err) {
+
+      res.render('reading_page', {rows: false, user: req.user} );
+    }
+    else if (result.rows.length > 0) {
+      console.log("Found some messages");
+      console.log(result.rows);
+      res.render('reading_page', {rows:result.rows});
+    }
+    else{
+      console.log(req.body.message_id_number);
+      res.render('reading_page', {rows: false, user: req.user} );
+      console.log("Oops? Something really bad happened");
+    }
+  });
 });
 
 router.get('/changePassword', function(req, res, next){
