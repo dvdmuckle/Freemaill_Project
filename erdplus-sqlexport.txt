@@ -1,0 +1,31 @@
+CREATE TABLE mailUsers (
+  UserID SERIAL NOT NULL PRIMARY KEY,
+  FirstName TEXT NOT NULL,
+  LastName TEXT NOT NULL,
+  Username TEXT NOT NULL UNIQUE,
+  Password TEXT NOT NULL,
+  Sex TEXT,
+  Moderator_Status TEXT NOT NULL
+);
+
+CREATE TABLE Messages
+(
+  MessageId SERIAL NOT NULL PRIMARY KEY,  
+  Sender TEXT NOT NULL,
+  Recipient TEXT NOT NULL,
+  Body TEXT,
+  Subject TEXT,
+  Date_Sent TEXT,
+  Read_Status BOOLEAN NOT NULL,
+  In_Trash BOOLEAN NOT NULL,
+  FOREIGN KEY (Sender) REFERENCES mailUsers(Username),
+  FOREIGN KEY (Recipient) REFERENCES mailUsers(Username)
+);
+
+///////////////////////////////////////////////////////////////////////////////
+
+DATA TO ADD:
+TO messages:
+	INSERT INTO messages(sender, recipient, body, subject, date_sent, read_status, in_trash) VALUES ('Sab','Sabbatini','This is my project, enjoy this really well','Hi, I attached my page to this',to_char(current_timestamp,'Day, Mon DD,YYYY HH12:MI'),'false','false');
+
+//////////////////////////////////////////////////////////////////////////////
