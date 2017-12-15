@@ -34,7 +34,7 @@ router.get('/profile', function(req, res, next){
       else if (result.rows.length > 0) {
         console.log("Found some messages");
         console.log(result.rows);
-        res.render('profile', {rows: result.rows, user: req.user} );
+        res.render('profile', {rows: result.rows.reverse(), user: req.user} );
       }
       else{
         res.render('profile', {rows: false, user: req.user} );
@@ -61,7 +61,7 @@ router.get('/outbox', function(req, res, next){
       }
       else if (result.rows.length > 0) {
         console.log("Found some messages");
-        console.log(result.rows);
+        console.log(result.rows.reverse());
         res.render('outbox', {rows: result.rows, user: req.user} );
       }
       else{
@@ -79,15 +79,6 @@ router.post('/sent', function(req, res, next){
 
   client.query('Select to_char(current_timestamp,\'Day, Mon DD,YYYY HH12:MI\')', function(err, date){
 
-    var the_date;
-
-
-
-    for(row in date.rows){
-      the_date = date.rows[row];
-      console.log(the_date);
-    };
-
     client.query('INSERT INTO messages(sender, recipient, body, subject,read_status, in_trash, date_sent) VALUES ($1,$2,$3,$4,$5,$6,$7)',[req.body.from,req.body.to,req.body.message_body,req.body.subject,false,false,date.rows[0].to_char], function(err,result){
 
       if (err) {
@@ -98,6 +89,10 @@ router.post('/sent', function(req, res, next){
       }
     });
   });
+});
+
+router.get('/createmail', function(req, res, next){
+    res.render('createmail', {user: req.user});
 });
 
 router.get('/reading_page', function(req, res, next){

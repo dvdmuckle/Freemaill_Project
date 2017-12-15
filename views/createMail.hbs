@@ -1,0 +1,35 @@
+<div class="card-reveal">
+  <br>
+  <div class="row">
+  <form class="col s12" action="/mail/sent" method="post">
+    <div class="row">
+        <div class="input-field col s12">
+          <span class="card-title grey-text">From: {{user.username}}@freemail.com <i class="material-icons right">close</i></span>
+          <input type="hidden" name="from" value="{{user.username}}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+          <input type="text" id="to" name="to" value="">
+          <label for="to">To:</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+          <input name="subject" id="subject" type="text" class="validate">
+          <label class="active" for="subject">Subject</label>
+        </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12" id="Full_Page">
+        <textarea name="message_body" id="message_body" class="materialize-textarea"></textarea>
+        <label for="message_body">Message</label>
+        <button class="btn right waves-effect waves-light" type="submit" name="action">Send
+      <i class="material-icons right">send</i>
+    </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+</div>
