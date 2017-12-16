@@ -1,17 +1,18 @@
-<div class="card-reveal">
+<div class="card">
   <br>
   <div class="row">
   <form class="col s12" action="/mail/sent" method="post">
     <div class="row">
         <div class="input-field col s12">
-          <span class="card-title grey-text">From: {{user.username}}@freemail.com <i class="material-icons right">close</i></span>
+          <h5 class="card-title grey-text">From: {{user.username}}@freemail.com</h5>
+          <a class="btn-floating red " style="right: 10px; position: absolute ; color: red" href="/mail/reading_page" ><i class="material-icons">close</i></a>
           <input type="hidden" name="from" value="{{user.username}}">
         </div>
     </div>
     <div class="row">
         <div class="input-field col s12">
-          <input type="text" id="to" name="to" value="">
-          <label for="to">To:</label>
+          <input type="text" id="to" name="to">
+          <label for="to">To</label>
         </div>
     </div>
     <div class="row">
@@ -31,5 +32,4 @@
     </div>
   </form>
 </div>
-
 </div>

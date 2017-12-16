@@ -34,6 +34,7 @@ router.get('/profile', function(req, res, next){
       else if (result.rows.length > 0) {
         console.log("Found some messages");
         console.log(result.rows);
+        //The result.rows.reverse is a javascript code that just reverses the array of the result to show most recent message first
         res.render('profile', {rows: result.rows.reverse(), user: req.user} );
       }
       else{
@@ -80,6 +81,8 @@ router.post('/sent', function(req, res, next){
   client.query('Select to_char(current_timestamp,\'Day, Mon DD,YYYY HH12:MI\')', function(err, date){
 
     client.query('INSERT INTO messages(sender, recipient, body, subject,read_status, in_trash, date_sent) VALUES ($1,$2,$3,$4,$5,$6,$7)',[req.body.from,req.body.to,req.body.message_body,req.body.subject,false,false,date.rows[0].to_char], function(err,result){
+
+      console.log("This sent box work");
 
       if (err) {
         res.render('message_sent', {sent: false})
