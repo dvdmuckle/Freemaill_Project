@@ -31,7 +31,6 @@ body{
   width: 100%;
   min-height: 400px;
   max-height: 500px;
-
 }
 
 #form_label{
@@ -52,7 +51,6 @@ iframe{
   width: 100%;
   min-height: 500px;
   overflow: hidden;
-
 }
 
 iframe:focus{
@@ -77,11 +75,20 @@ iframe[seamless] {
   max-height: 500px;
 }
 
+#createmail
+{
+  border-radius: 15px 0px 0px;
+  overflow: scroll;
+  overflow-x: hidden;
+  max-height: 440px;
+  width: 100%;
+  top: 2px;
+}
+
 #mail_layout
 {
   min-height: 500px;
   max-height: 500px;
-
 }
 
 #Logon_Fonts
