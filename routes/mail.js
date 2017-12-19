@@ -129,7 +129,7 @@ router.post('/sent', function(req, res, next){
 
 //Loads the createmail.hbs template that enables you to create a new message from nothing.(Not a reply)
 router.get('/createmail', function(req, res, next){
-    res.render('createmail', {user: req.user});
+    res.render('createMail', {user: req.user});
 });
 
 //The Iframe page route to get the blank reading page (Initially done when first login, cause no mail is clicked on)
