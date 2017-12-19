@@ -63,6 +63,7 @@
             <i class="material-icons">email</i>
             <h5>From: {{sender}}@freemail.com</h5>
             <h5>To:   {{recipient}}@freemail.com</h5>
+
             {{#if read_status}}
               <!--DO NOTHING-->
             {{else}}
@@ -86,7 +87,7 @@
 
       </ul>
         {{else}}
-        <h4>NO INBOX EMAIL</h4>
+        <h4>TRASH IS EMPTY</h4>
       {{/if}}
     </div>
 

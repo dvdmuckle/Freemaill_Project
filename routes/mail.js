@@ -141,6 +141,17 @@ router.get('/reading_page', function(req, res, next){
 //Iframe page: Once mail is clicked on, It passes the ID number of the message and retrieves the body and subject.
 router.post('/reading_page', function(req, res, next){
 
+  //Removes the new tag from the message that is opened
+  client.query('UPDATE messages SET read_status = $2 WHERE messageid = $1', [req.body.message_id_number, true],function(err,result){
+    console.log('read status works');
+
+    if (err) {
+
+      console.log('iread status does not works');
+    }
+  });
+
+  //Shows the content of the email
   client.query('SELECT * FROM messages WHERE messageid=$1',[req.body.message_id_number], function(err,result){
     console.log('iframe works');
 
