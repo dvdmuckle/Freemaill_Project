@@ -17,7 +17,7 @@ function loggedIn(req, res, next) {
   if (req.user) {
     next(); // req.user exists, go to the next function (right after loggedIn)
   } else {
-    res.render('index'); // user doesn't exists redirect to localhost:3000/users/login
+    res.render('login'); // user doesn't exists redirect to localhost:3000/login
   }
 }
 

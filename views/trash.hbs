@@ -37,7 +37,7 @@
             <li class="divider"></li>
             <li><a href="/logout">Log out</a></li>
           </ul>
-          <a href="#!" class="brand-logo center" style="color:#ffd6cc">&nbsp; TRASH</a>
+          <a href="#!" class="floating brand-logo center pulse" style="color:#ffd6cc">&nbsp; TRASH</a>
           <!-- Dropdown Trigger -->
           <ul class="right hide-on-small">
             <li><a class="dropdown-button right" style="color:white" href="#!" data-activates="dropdown1">More Options<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -51,7 +51,7 @@
   <div class="row z-depth-5" id="mail_layout">
 
     <!--SELECT EMAIL PAGE-->
-    <div class="col s4 z-depth-5" id="email_page" >
+    <div class="col s6 z-depth-5" id="email_page" >
       {{#if rows}}
 
       <ul class="collapsible" data-collapsible="accordion">
@@ -62,6 +62,7 @@
           <div class="collapsible-header flow-text">
             <i class="material-icons">email</i>
             <h5>From: {{sender}}@freemail.com</h5>
+            <h5>To:   {{recipient}}@freemail.com</h5>
             {{#if read_status}}
               <!--DO NOTHING-->
             {{else}}
@@ -85,12 +86,12 @@
 
       </ul>
         {{else}}
-        <h4>TRASH IS EMPTY</h4>
+        <h4>NO INBOX EMAIL</h4>
       {{/if}}
     </div>
 
     <!--VIEW / EDIT EMAIL-->
-    <div class="col s8 z-depth-5" id="read_page">
+    <div class="col s6 z-depth-5" id="read_page">
       <div class="row">
         <div class="col s12 ">
           <iframe src="/mail/reading_page" frameborder="0" name="reading_frame" scrolling="no" >

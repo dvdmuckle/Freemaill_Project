@@ -1,18 +1,20 @@
+//////////// IMPORTS & DEFINING VARIABLES ///////////////////////////////////////////
 var express = require('express');
 var router = express.Router();
-
 var env = require('dotenv').config();
+var passport = require('passport');
+var bcrypt = require('bcryptjs');
 const Client = require('pg').Client;
+
 const client = new Client({
   connectionString: process.env.DATABASE_URL
 });
 client.connect(); //connect to database
 
-var passport = require('passport');
-var bcrypt = require('bcryptjs');
 /////// FUNCTIONS THAT WILL HELP SOME PROCESS //////////////////
 ////////////////////////////////////////////////////////////////
 
+//Function that encrypts a password for me
 function encryptPWD(password){
   var salt = bcrypt.genSaltSync(10);
   return bcrypt.hashSync(password, salt);
@@ -21,6 +23,7 @@ function encryptPWD(password){
 /////// THE ROUTE FUNCTIONS ////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 
+//First page of mail recieved by user
 router.get('/profile', function(req, res, next){
 
   if(req.user)
@@ -49,6 +52,7 @@ router.get('/profile', function(req, res, next){
   }
 });
 
+//The page of mail sent by user
 router.get('/outbox', function(req, res, next){
 
   if(req.user)
@@ -57,7 +61,7 @@ router.get('/outbox', function(req, res, next){
       console.log('it works');
 
       if (err) {
-        console.log("exam.js: sql error ");
+        console.log("mail.js: sql error ");
         next(err); // throw error to error.hbs.
       }
       else if (result.rows.length > 0) {
@@ -76,6 +80,35 @@ router.get('/outbox', function(req, res, next){
   }
 });
 
+//The page of mail sent and recieved by the user that were deleted
+router.get('/trash', function(req, res, next){
+
+  if(req.user)
+  {
+    client.query('SELECT * FROM messages WHERE recipient=$1 OR sender=$1',[req.user.username], function(err,result){
+      console.log('it works');
+
+      if (err) {
+        console.log("mail.js: sql error ");
+        next(err); // throw error to error.hbs.
+      }
+      else if (result.rows.length > 0) {
+        console.log("Found some messages");
+        console.log(result.rows.reverse());
+        res.render('trash', {rows: result.rows, user: req.user} );
+      }
+      else{
+        res.render('trash', {rows: false, user: req.user} );
+        console.log("Oops? Something really bad happened");
+      }
+    });
+  }
+  else {
+    res.render('profile', {rows: false, user: req.user} );
+  }
+});
+
+//The Iframe page route for mail sent process and confirmation
 router.post('/sent', function(req, res, next){
 
   client.query('Select to_char(current_timestamp,\'Day, Mon DD,YYYY HH12:MI\')', function(err, date){
@@ -94,15 +127,18 @@ router.post('/sent', function(req, res, next){
   });
 });
 
+//Loads the createmail.hbs template that enables you to create a new message from nothing.(Not a reply)
 router.get('/createmail', function(req, res, next){
     res.render('createmail', {user: req.user});
 });
 
+//The Iframe page route to get the blank reading page (Initially done when first login, cause no mail is clicked on)
 router.get('/reading_page', function(req, res, next){
 
   res.render('reading_page', {rows: false});
 });
 
+//Iframe page: Once mail is clicked on, It passes the ID number of the message and retrieves the body and subject.
 router.post('/reading_page', function(req, res, next){
 
   client.query('SELECT * FROM messages WHERE messageid=$1',[req.body.message_id_number], function(err,result){
@@ -125,11 +161,13 @@ router.post('/reading_page', function(req, res, next){
   });
 });
 
+//Retrieves the change Password form from the changePassword.hbs template
 router.get('/changePassword', function(req, res, next){
 
   res.render('changePassword', {user: req.user});
 });
 
+//Execute the administrative work of error checking current password and assuring the new password is correctly inputed.
 router.post('/changePassword', function(req, res, next){
 
   //Checking to see if the password match here.
