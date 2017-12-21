@@ -180,7 +180,7 @@ router.post('/delete', function(req, res, next){
             for (i = 0; i < result.rows.length; i++) {
 
               console.log(result.rows[i].messageid);
-              /*client.query('DELETE FROM messages WHERE messageid = $1 AND in_trash = $2', [result.rows[i].messageid, true], function(err, result){
+              client.query('DELETE FROM messages WHERE messageid = $1 AND in_trash = $2', [result.rows[i].messageid, true], function(err, result){
 
 
                 if (err) {
@@ -193,7 +193,7 @@ router.post('/delete', function(req, res, next){
                   res.render('',{afdeleted: true , deleted: false , fdeleted: false})
                 }
 
-              });*/
+              });
 
             }
           }
