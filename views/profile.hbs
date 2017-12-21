@@ -73,18 +73,27 @@
             <span>Date Received: {{date_sent}}</span>
             <ul style="text-align: right ; color: black; font-size: 130%">
 
+              <br>
               <div class="container">
-              <form method="post" action="/mail/reading_page" target="reading_frame">
-                <input type="hidden" name="message_id_number" value="{{messageid}}">
-                <button type="submit" name="action" class="btn-floating card-reveal z-depth-1"><i class="small material-icons">open_in_new</i></button>
-              </form>
+                <div class="row">
+                  <div class="col s1 push-s10 ">
+                    <form method="post" action="/mail/reading_page" target="reading_frame">
+                      <input type="hidden" name="message_id_number" value="{{messageid}}">
 
-              <form method="post" action="/mail/delete" target="reading_frame">
-                <input type="hidden" name="deleted" value="true">
-                <input type="hidden" name="message_id_number" value="{{messageid}}">
-                <button type="submit" name="action" class="btn-floating card-reveal z-depth-1"><i class="small material-icons">delete</i></button>
-              </form>
-            </div>
+                      <button type="submit" name="action" class="btn-floating card-reveal z-depth-1"><i class="small material-icons">open_in_new</i></button>
+                      <label style="color:black; text-align: center" for="action">Read</label>
+                    </form>
+                  </div>
+                  <div class="col s1 push-s11 ">
+                    <form method="post" action="/mail/delete" target="reading_frame" style="text-align: right">
+                      <input type="hidden" name="deleted" value="true">
+                      <input type="hidden" name="message_id_number" value="{{messageid}}">
+                      <button type="submit" name="action" class="btn-floating card-reveal z-depth-1"><i class="small material-icons">delete</i></button>
+                      <label style="color:black; text-align: center" for="action">Delete</label>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </ul>
           </div>
         </li>
