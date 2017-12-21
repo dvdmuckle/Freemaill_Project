@@ -9,6 +9,7 @@ const Client = require('pg').Client;
 const client = new Client({
   connectionString: process.env.DATABASE_URL
 });
+
 client.connect(); //connect to database
 
 /////// FUNCTIONS THAT WILL HELP SOME PROCESS //////////////////
