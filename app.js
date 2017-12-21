@@ -40,7 +40,7 @@ passport.use(new LocalStrategy({
       }
       if (result.rows.length > 0) {
 
-        var matched = true;//bcrypt.compareSync(password, result.rows[0].password);
+        var matched = bcrypt.compareSync(password, result.rows[0].password);
 
         if (matched) {
           console.log("Successful login, ", result.rows[0]);
