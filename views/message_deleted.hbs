@@ -1,0 +1,42 @@
+{{#if deleted}}
+<div class="card black darken-1" id="Full_Page">
+  <h3 style="color: green ; text-align: center;">Deleted Message is Trashed</h3>
+  <div class="row" style="position: absolute; right: 2px ; bottom: 0px">
+    <a class="btn btn-floating btn-large " href="/mail/createmail"><i class="material-icons">edit</i></a>
+  </div>
+</div>
+
+{{else}}
+
+  {{#if fdeleted}}
+<div class="card black darken-1" id="Full_Page">
+  <h3 style="color: green ; text-align: center;">Message is deleted forever</h3>
+  <div class="row" style="position: absolute; right: 2px ; bottom: 0px">
+    <a class="btn btn-floating btn-large " href="/mail/createmail"><i class="material-icons">edit</i></a>
+  </div>
+</div>
+
+  {{else}}
+
+    {{#if afdeleted}}
+<div class="card black darken-1" id="Full_Page">
+  <h3 style="color: green ; text-align: center;">All Messages are deleted forever</h3>
+  <div class="row" style="position: absolute; right: 2px ; bottom: 0px">
+    <a class="btn btn-floating btn-large " href="/mail/createmail"><i class="material-icons">edit</i></a>
+  </div>
+</div>
+
+    {{else}}
+
+<div class="card black darken-1" id="Full_Page">
+  <h3 style="color: red ; text-align: center;">Message Not Deleted try again</h3>
+  <div class="row" style="position: absolute; right: 2px ; bottom: 0px">
+    <a class="btn btn-floating btn-large " href="/mail/createmail"><i class="material-icons">edit</i></a>
+  </div>
+</div>
+
+    {{/if}}
+
+  {{/if}}
+
+{{/if}}

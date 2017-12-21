@@ -28,7 +28,7 @@ router.get('/profile', function(req, res, next){
 
   if(req.user)
   {
-    client.query('SELECT * FROM messages WHERE recipient=$1',[req.user.username], function(err,result){
+    client.query('SELECT * FROM messages WHERE recipient=$1 AND in_trash = $2',[req.user.username, false], function(err,result){
       console.log('it works');
 
       if (err) {
@@ -57,7 +57,7 @@ router.get('/outbox', function(req, res, next){
 
   if(req.user)
   {
-    client.query('SELECT * FROM messages WHERE sender=$1',[req.user.username], function(err,result){
+    client.query('SELECT * FROM messages WHERE sender=$1 AND in_trash = $2',[req.user.username, false], function(err,result){
       console.log('it works');
 
       if (err) {
@@ -85,7 +85,7 @@ router.get('/trash', function(req, res, next){
 
   if(req.user)
   {
-    client.query('SELECT * FROM messages WHERE recipient=$1 OR sender=$1',[req.user.username], function(err,result){
+    client.query('SELECT * FROM messages WHERE in_trash = $2 AND (recipient=$1 OR sender=$1)',[req.user.username, true], function(err,result){
       console.log('it works');
 
       if (err) {
@@ -130,6 +130,86 @@ router.post('/sent', function(req, res, next){
 //Loads the createmail.hbs template that enables you to create a new message from nothing.(Not a reply)
 router.get('/createmail', function(req, res, next){
     res.render('createMail', {user: req.user});
+});
+
+router.post('/delete', function(req, res, next){
+
+    //    temporary delete is on
+    if (req.body.deleted) {
+      client.query('UPDATE messages SET in_trash = $2 WHERE messageid = $1', [req.body.message_id_number, true],function(err,result){
+
+        if (err) {
+
+          console.log('delete does not works');
+          res.render('reading_page', {rows: false, user: req.user} );
+        }
+        else {
+          console.log('delete works');
+          res.render('message_deleted',{deleted: true , fdeleted: false , afdeleted: false})
+        }
+
+
+      });
+    }
+    else {
+      // forever delete is on
+      if (req.body.fdeleted) {
+        client.query('DELETE FROM messages WHERE messageid = $1 AND in_trash = $2', [req.body.message_id_number, true],function(err,result){
+
+          if (err) {
+
+            console.log('fdelete does not works');
+            res.render('reading_page', {rows: false, user: req.user} );
+          }
+          else {
+            console.log('fdelete works');
+            res.render('message_deleted',{fdeleted: true , deleted: false , afdeleted: false})
+          }
+
+
+        });
+      }
+      else {
+        //all deleted forever is on
+        if (req.body.afdeleted){
+
+          client.query('SELECT * FROM messages WHERE in_trash = $2 AND (recipient=$1 OR sender=$1)',[req.user.username, true], function(err,result){
+
+            if (result.rows.length > 0) {
+
+            for (i = 0; i < result.rows.length; i++) {
+
+              console.log(result.rows[i].messageid);
+              /*client.query('DELETE FROM messages WHERE messageid = $1 AND in_trash = $2', [result.rows[i].messageid, true], function(err, result){
+
+
+                if (err) {
+
+                  console.log('afdelete does not works');
+                  res.render('reading_page', {rows: false, user: req.user} );
+                }
+                else {
+                  console.log('afdelete works');
+                  res.render('',{afdeleted: true , deleted: false , fdeleted: false})
+                }
+
+              });*/
+
+            }
+          }
+          else {
+            console.log('afdelete does not works');
+            res.render('reading_page', {rows: false, user: req.user} );
+          }
+
+          });
+        }
+        else {
+          console.log('delete route does not works');
+          res.render('reading_page', {rows: false, user: req.user} );
+        }
+      }
+    }
 });
 
 //The Iframe page route to get the blank reading page (Initially done when first login, cause no mail is clicked on)
