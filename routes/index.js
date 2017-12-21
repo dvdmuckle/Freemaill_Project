@@ -105,7 +105,7 @@ router.post('/signup', function(req, res, next){
         if((req.body.password1 != "") && (req.body.password1 == req.body.password2))
         {
 
-          var newencrypted = req.body.password1;//encryptPWD(req.body.password1);
+          var newencrypted = encryptPWD(req.body.password1);
           console.log("Checking Password");
           client.query('INSERT INTO mailUsers(firstname, lastname, username, password, sex, moderator_status) VALUES ($1,$2,$3,$4,$5,$6)', [req.body.firstName, req.body.lastName, req.body.username, newencrypted, req.body.sex, 'User'], function(err, result){
             if(err)

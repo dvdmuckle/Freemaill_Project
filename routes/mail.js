@@ -132,6 +132,7 @@ router.get('/createmail', function(req, res, next){
     res.render('createMail', {user: req.user});
 });
 
+//Deletes the message and sends to trash or deletes all messages and sends to trash
 router.post('/delete', function(req, res, next){
 
     //    temporary delete is on
@@ -190,7 +191,7 @@ router.post('/delete', function(req, res, next){
                 }
                 else {
                   console.log('afdelete works');
-                  res.render('',{afdeleted: true , deleted: false , fdeleted: false})
+                  res.render('message_deleted',{afdeleted: true , deleted: false , fdeleted: false})
                 }
 
               });
@@ -265,7 +266,7 @@ router.post('/changePassword', function(req, res, next){
   var username = req.user.username;
   var userpass = req.user.password;
   var newuserpass = req.body.current;
-  var matched = true;//bcrypt.compareSync(newuserpass, userpass);
+  var matched = bcrypt.compareSync(newuserpass, userpass);
 
   console.log(newuserpass);
   console.log("password match is " + matched);
@@ -283,7 +284,7 @@ router.post('/changePassword', function(req, res, next){
       {
         if((req.body.new1 != "") && (req.body.new1 == req.body.new2))
         {
-          var newencrypted = req.body.new1 //;encryptPWD(req.body.new1);
+          var newencrypted = encryptPWD(req.body.new1);
           //Sets new password to Username
           client.query('UPDATE mailusers SET password = $2 WHERE username = $1', [username, newencrypted], function(err, result){
             if(err)
