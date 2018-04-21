@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+
+  postgres:
+    image: postgres:9.1
+    volumes:
+      - data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - freemaill
+    restart: always
+  freemaill:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    networks:
+      - freemaill
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: "postgres://postgres:root@postgres/postgres"
+networks:
+  freemaill:
+    driver: bridge
+volumes:
+  data:
