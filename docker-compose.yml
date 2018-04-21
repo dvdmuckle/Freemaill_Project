@@ -1,9 +1,9 @@
-version: '2'
+version: '2.1'
 
 services:
 
   postgres:
-    image: postgres:9.1
+    image: postgres:10.3
     volumes:
       - data:/var/lib/postgresql/data
     ports:
@@ -11,6 +11,11 @@ services:
     networks:
       - freemaill
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
   freemaill:
     build:
       context: .
@@ -20,7 +25,8 @@ services:
       - freemaill
     restart: always
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     environment:
       DATABASE_URL: "postgres://postgres:root@postgres/postgres"
 networks:
